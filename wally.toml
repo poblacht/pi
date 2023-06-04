@@ -1,0 +1,9 @@
+[package]
+name = "indxd/roblox"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+knit = "sleitnick/knit@1.5.1"
+datastore2 = "nidoxs/datastore2@1.4.0"
