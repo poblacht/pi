@@ -30,15 +30,25 @@ end
 function Service:Destroy(ProximityPrompt: ProximityPrompt, Player: Player)
 	local tree = ProximityPrompt.Parent.Parent.Parent
 	local Cash = Datastore("Cash", Player)
+    local Explosion: Explosion = Instance.new("Explosion")
+
+    Explosion.Parent = tree
+
+    Explosion.BlastPressure = 20
+    Explosion.BlastRadius = 20
+    
+
 	ProximityPrompt.Parent:Destroy()
 
 	Cash:Increment(10)
 
-	for _, Something in pairs(tree:GetDescendants()) do
-		if Something:IsA("MeshPart") then
-			Something.Anchored = false
+	for _, Part in pairs(tree:GetDescendants()) do
+		if Part:IsA("MeshPart") then
+			Part.Anchored = false
 		end
 	end
+
+    Explosion.Visible = true
 
 	task.wait(5)
 	Tree:Destroy()
@@ -48,7 +58,7 @@ end
 function Service:Spawn()
 	if (#workspace.Trees:GetChildren() <= 50) then
 		local location = self:RandomiseSpawn()
-		local orientation = self:randomiseOrientation()
+		local orientation = self:RandomiseOrientation()
 		local treeNew = Tree:Clone()
 		treeNew.Parent = TreeFolder
 		treeNew:SetPrimaryPartCFrame(orientation)
@@ -69,8 +79,12 @@ function Service:Spawn()
 	end
 end
 
-function Service.KnitStart()
+function Service:KnitStart()
 	print(`[{Service.Name}] Started`)
+
+    while task.wait(5) do
+        self:Spawn()
+    end
 end
 
 return Service
