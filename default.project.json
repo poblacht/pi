@@ -29,7 +29,7 @@
     "Lighting": {
       "$properties": {
         "Ambient": [
-          0.541176, 0.52549, 0.501961
+          0.541176, 0.541176, 0.541176
         ],
         "Brightness": 2,
         "GlobalShadows": true,
